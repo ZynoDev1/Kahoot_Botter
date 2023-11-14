@@ -60,6 +60,7 @@ def main():
         bot()  
         amount = amount - 1  
     if amount == 0:
+        cnter = 0
         print("""Botting done 
               Returning back to main program in 5 seconds""")
         time.sleep(5)
