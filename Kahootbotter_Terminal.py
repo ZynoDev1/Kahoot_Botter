@@ -26,8 +26,12 @@ def main():
     print(title)
     pin = int(input(prefix+'Input kahoot pin » '))
     amount = int(input(prefix+'Bots » '))  
+    cnames = str(input(prefix+'Type custom name, Press enter to use default setting » '))
+    global cnter
+    cnter = 0
     def bot():
         print("LOADING BOT  BOTNUMBER| "+ str(amount))
+ 
         driver.get("https://kahoot.it")
         pinloc = driver.find_element(By.XPATH, "/html/body/div/div[1]/div/div/div/div[3]/div[2]/main/div/form/input")
         pinloc.click()
@@ -42,13 +46,17 @@ def main():
                       Most likely invalid pin returning to main program""")
              main()
         userfield.click()
-        userfield.send_keys('stfu fuck you ')
+        if not cnames:
+         userfield.send_keys('stfu fuck you ')
+        elif cnames != None:
+            userfield.send_keys(cnames+str(cnter))
         start = driver.find_element(By.XPATH, "/html/body/div/div[1]/div/div/div/div/div[2]/main/div/form/button")
         start.click()
         print(' BOT SUCCESFULLY JOINED BOTNUMBER| ' + str(amount))
         driver.execute_script("window.open('about:blank', '_blank');")
         driver.switch_to.window(driver.window_handles[-1])
     while amount > 0:
+        cnter = cnter+1
         bot()  
         amount = amount - 1  
     if amount == 0:
